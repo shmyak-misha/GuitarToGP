@@ -12,6 +12,12 @@ pdfplumber>=0.11.0
 pymupdf>=1.23.0
 pytesseract>=0.3.10
 
+# Standard music notation parsing (staff PDFs with embedded MusicXML or via OMR)
+# music21 parses MusicXML produced by embedded extraction or oemer OMR.
+# oemer (optional, ~1.5 GB with PyTorch) enables optical music recognition:
+#   pip install oemer
+music21>=9.1.0
+
 # YouTube audio download
 yt-dlp>=2024.3.10
 

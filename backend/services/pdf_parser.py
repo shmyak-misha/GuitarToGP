@@ -1064,6 +1064,18 @@ def parse_pdf_tab(pdf_path: Path) -> Tuple[List[NoteEvent], float]:
         sample_hint = (
             f"\n\nFirst lines seen by OCR:\n{ocr_sample[:400]}" if ocr_sample else ""
         )
+
+        # Fallback 4 — standard music notation (staff notation PDFs).
+        # Try embedded MusicXML and, if oemer is installed, optical recognition.
+        try:
+            from services.notation_parser import parse_notation_pdf
+            return parse_notation_pdf(pdf_path)
+        except RuntimeError as notation_err:
+            # notation_parser gives a detailed, actionable message; surface it.
+            raise ValueError(str(notation_err)) from None
+        except Exception:
+            pass  # unexpected import/runtime failure → fall through to generic error
+
         raise ValueError(
             f"No guitar tablature found in the PDF ({methods} attempted). "
             "Make sure the PDF contains ASCII guitar tabs "
