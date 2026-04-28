@@ -1,0 +1,48 @@
+Stave 0, SI 1, xs=0, cw=23, dk=161
+Stave 0, SI 2, xs=4, cw=14, dk=125
+Stave 0, SI 3, xs=0, cw=26, dk=193
+Stave 0, SI 4, xs=0, cw=24, dk=298
+Stave 0, SI 5, xs=0, cw=22, dk=90
+Written: D:/Projects/MusicToGP/backend/output/test_v20.gp5
+
+=== Bar 1 notes (GP file) ===
+  string=3  fret=4
+  string=2  fret=1
+  string=5  fret=3
+  string=4  fret=2
+  string=3  fret=0
+  string=2  fret=1
+  string=3  fret=0
+  string=4  fret=2
+  string=2  fret=1
+  string=3  fret=0
+  string=4  fret=2
+  string=5  fret=3
+  string=4  fret=2
+  string=3  fret=0
+
+=== Bar 11 notes (GP file) ===
+  string=4  fret=3
+  ---
+  string=2  fret=1
+  ---
+  string=1  fret=1
+  ---
+  string=1  fret=1
+  ---
+  string=2  fret=1
+  ---
+  string=3  fret=2
+  ---
+  string=4  fret=3
+  ---
+  string=3  fret=2
+  ---
+  string=2  fret=1
+  ---
+  string=1  fret=1
+  ---
+  string=1  fret=3
+  ---
+  string=1  fret=5
+  ---

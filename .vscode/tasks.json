@@ -1,0 +1,25 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Restart MusicToGP Server",
+      "type": "shell",
+      "command": "Stop-Process -Name python -ErrorAction SilentlyContinue; Start-Sleep -Milliseconds 500; Start-Process -NoNewWindow 'D:\\Projects\\MusicToGP\\.venv\\Scripts\\python.exe' '-m','uvicorn','main:app','--host','127.0.0.1','--port','8000' -WorkingDirectory 'D:\\Projects\\MusicToGP\\backend' -RedirectStandardOutput '..\\uvicorn_out.txt' -RedirectStandardError '..\\uvicorn_err.txt'; Start-Sleep -Seconds 2; Start-Process 'http://127.0.0.1:8000'",
+      "options": {
+        "shell": {
+          "executable": "powershell.exe",
+          "args": ["-NoProfile", "-Command"]
+        }
+      },
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared",
+        "close": true
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

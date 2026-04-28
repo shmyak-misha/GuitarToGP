@@ -1,0 +1,45 @@
+# MusicToGP — Python dependencies
+# Install with:  pip install -r requirements.txt
+# Requires Python 3.11+ and ffmpeg on PATH
+
+# Web framework
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9
+
+# PDF tab parsing
+pdfplumber>=0.11.0
+pymupdf>=1.23.0
+pytesseract>=0.3.10
+
+# YouTube audio download
+yt-dlp>=2024.3.10
+
+# Audio analysis — tempo estimation
+librosa>=0.10.1
+numpy>=1.26.0
+soundfile>=0.12.1
+
+# ML polyphonic pitch detection (Spotify basic-pitch, ONNX backend — no TF required)
+# Install order matters: resampy must be <0.4.3 for basic-pitch 0.4.0
+#   pip install "setuptools==69.5.1"
+#   pip install "resampy==0.4.2" onnxruntime mir-eval pretty-midi
+#   pip install "basic-pitch==0.4.0" --no-deps
+resampy==0.4.2
+onnxruntime>=1.20.0
+mir-eval>=0.6
+pretty-midi>=0.2.9
+
+# Source separation — strips drums/bass/vocals before transcription (Meta Demucs)
+# Requires PyTorch CPU:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+#   pip install demucs
+# The htdemucs model (~80 MB) is auto-downloaded on first use.
+demucs>=4.0.1
+
+# Guitar Pro file generation
+PyGuitarPro>=0.6.0
+
+# Source separation (optional — enables --separate flag in future)
+# Uncomment to enable demucs:
+# demucs>=4.0.0

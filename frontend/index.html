@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MusicToGP — YouTube → Guitar Pro</title>
+  <link rel="stylesheet" href="/css/styles.css?v=29" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- ── Header ──────────────────────────────────────────────── -->
+    <header class="header">
+      <h1 class="header__title">
+        <span class="header__icon">🎸</span> GuitarToGP
+        <span class="header__version" id="app-version">…</span>
+      </h1>
+      <p class="header__subtitle">Convert a YouTube video <em>or</em> a PDF guitar tab to Guitar Pro tablature</p>
+    </header>
+
+    <!-- ── Main card ────────────────────────────────────────────── -->
+    <main class="card">
+
+      <!-- Mode tabs -->
+      <div class="mode-tabs" role="tablist">
+        <button class="mode-tab mode-tab--active" id="tab-youtube" role="tab" aria-selected="true"  aria-controls="panel-youtube">YouTube URL</button>
+        <button class="mode-tab"                  id="tab-pdf"     role="tab" aria-selected="false" aria-controls="panel-pdf">PDF Tab</button>
+      </div>
+
+      <!-- YouTube URL panel -->
+      <section id="panel-youtube" class="input-section" role="tabpanel">
+        <label class="label" for="youtube-url">YouTube URL</label>
+        <div class="url-row">
+          <input
+            id="youtube-url"
+            class="url-input"
+            type="url"
+            placeholder="https://www.youtube.com/watch?v=…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button id="convert-btn" class="btn btn--primary">Convert</button>
+        </div>
+        <p id="input-error" class="error-msg" hidden></p>
+        <p class="youtube-hint">Best results: solo fingerpicking on one acoustic or classical guitar.</p>
+
+        <section id="youtube-preview" class="youtube-preview" hidden>
+          <div class="youtube-preview__frame-wrap">
+            <iframe
+              id="youtube-preview-frame"
+              class="youtube-preview__frame"
+              src="about:blank"
+              title="YouTube preview"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+          <div class="youtube-preview__meta">
+            <p id="youtube-preview-title" class="youtube-preview__title">YouTube preview</p>
+            <a id="youtube-preview-link" class="youtube-preview__link" href="#" target="_blank" rel="noopener noreferrer">Open on YouTube</a>
+          </div>
+        </section>
+      </section>
+
+      <!-- PDF upload panel -->
+      <section id="panel-pdf" class="input-section" role="tabpanel" hidden>
+        <label class="label">PDF Guitar Tab</label>
+        <div id="drop-zone" class="drop-zone">
+          <span class="drop-zone__icon">�</span>
+          <p class="drop-zone__text">Drag &amp; drop a PDF here</p>
+          <p class="drop-zone__sub">or</p>
+          <label class="btn btn--ghost drop-zone__browse" for="pdf-file-input">Browse…</label>
+          <input id="pdf-file-input" type="file" accept=".pdf" hidden />
+        </div>
+        <p id="pdf-filename" class="pdf-filename" hidden></p>
+        <p id="pdf-error" class="error-msg" hidden></p>
+        <button id="convert-pdf-btn" class="btn btn--primary" disabled>Convert PDF</button>
+      </section>
+
+      <!-- Progress area (shown while processing) -->
+      <section id="progress-section" class="progress-section" hidden>
+        <div class="progress-header">
+          <span id="progress-label" class="progress-label">Processing…</span>
+          <span id="progress-pct" class="progress-pct">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-bar__fill" style="width:0%"></div>
+        </div>
+        <p id="progress-message" class="progress-message"></p>
+      </section>
+
+      <!-- Download area (shown on completion) -->
+      <section id="download-section" class="download-section" hidden>
+        <div class="download-success">
+          <span class="download-icon">✅</span>
+          <p class="download-text">Your Guitar Pro file is ready!</p>
+        </div>
+        <a id="download-link" class="btn btn--success" download>
+          Download .gp5 file
+        </a>
+      <button id="new-btn" class="btn btn--ghost">Convert another</button>
+      </section>
+
+      <!-- Error area -->
+      <section id="error-section" class="error-section" hidden>
+        <div class="job-error">
+          <span class="error-icon">❌</span>
+          <p id="error-message" class="error-text"></p>
+        </div>
+        <button id="retry-btn" class="btn btn--ghost">Try again</button>
+      </section>
+
+    </main>
+
+    <!-- ── How it works ─────────────────────────────────────────── -->
+    <section class="steps">
+      <h2 class="steps__heading">How it works</h2>
+      <ol class="steps__list">
+        <li class="step">
+          <span class="step__num">1</span>
+          <div class="step__body">
+            <strong>Paste a YouTube URL <em>or</em> upload a PDF tab</strong>
+            <p>YouTube mode is optimized for solo fingerpicking on one acoustic/classical guitar, or use a text-based ASCII tab PDF.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__num">2</span>
+          <div class="step__body">
+            <strong>AI pitch detection</strong>
+            <p>Spotify's <em>basic-pitch</em> model detects every note in the audio.</p>
+          </div>
+        </li>
+        <li class="step">
+          <span class="step__num">3</span>
+          <div class="step__body">
+            <strong>Guitar Pro export</strong>
+            <p>Notes are mapped to string/fret positions and written as a <code>.gp5</code> file.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <footer class="footer">
+      <p>MusicToGP · local tool · no data is stored</p>
+    </footer>
+  </div>
+
+  <script src="/js/app.js?v=29"></script>
+</body>
+</html>
