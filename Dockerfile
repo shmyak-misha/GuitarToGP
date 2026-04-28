@@ -12,10 +12,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY backend/requirements.txt ./
 
 # basic-pitch 0.4.0 has strict install-order requirements; handle them here.
+# 1. Pin resampy first so basic-pitch can't pull a newer incompatible version.
+# 2. Install basic-pitch without deps to preserve the pinned resampy.
+# 3. Install everything else WITH deps (so uvicorn gets click, h11, etc.).
 RUN pip install --upgrade pip setuptools==69.5.1 && \
     pip install "resampy==0.4.2" onnxruntime mir-eval pretty-midi && \
     pip install "basic-pitch==0.4.0" --no-deps && \
-    pip install -r requirements.txt --no-deps --ignore-installed basic-pitch resampy
+    pip install -r requirements.txt
 
 # ── Stage 2: runtime image ─────────────────────────────────────────────────────
 FROM python:3.11-slim
