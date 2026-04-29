@@ -180,6 +180,21 @@ def _map_chord_notes(midi_pitches: List[int]) -> List[Tuple[int, int, int]]:
     return mapped
 
 
+def _apply_bars_per_line(track: guitarpro.Track, bars_per_line: int = 3) -> None:
+    """Force a stable bars-per-line layout for GP editors/viewers.
+
+    For each group, bars 1..(N-1) are protected from auto-wrap and bar N
+    forces a new line.
+    """
+    if bars_per_line <= 0:
+        return
+    for idx, measure in enumerate(track.measures, start=1):
+        if idx % bars_per_line == 0:
+            measure.lineBreak = guitarpro.LineBreak.break_
+        else:
+            measure.lineBreak = guitarpro.LineBreak.protect
+
+
 def _suppress_resonance(
     quantized: List[Tuple[int, int, int, float]],
     window: int = 8,
@@ -466,6 +481,9 @@ def convert_to_gp(
     track.measures.clear()
     for hdr in song.measureHeaders:
         track.measures.append(guitarpro.Measure(track, hdr))
+
+    # Keep engraving consistent: wrap every 3 bars across the whole score.
+    _apply_bars_per_line(track, bars_per_line=3)
 
     # ---- Place notes into measures with rests ----------------------------
     grouped_by_start: Dict[int, List[Tuple[int, int, float]]] = defaultdict(list)

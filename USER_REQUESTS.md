@@ -76,3 +76,11 @@ All user requests recorded from the development chat sessions.
 35. Ensure all user requests are added to this requests list file.
 36. Clarify whether scan quality improves if all YouTube URLs are fingerpicking on a single acoustic/classical guitar.
 37. Apply that recommendation in the app (UI messaging + behavior) accordingly.
+
+---
+
+## Session 8 (workflow requirements, 2026-04-29)
+
+38. After each requested change is completed, explicitly confirm it is finished and provide clear testing steps.
+39. Update USER_REQUESTS.md every time a new user request is submitted.
+40. Only add actual requests to USER_REQUESTS.md — do not log questions.
